@@ -1,0 +1,254 @@
+swagger: "2.0"
+info:
+  description: "This is a Clothes API exposes the same services to all consumers regardless of the client channels implemeneted(website, mobile ...)"
+  version: "1.0.0"
+  title: "Clothes API"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+host: "petstore.swagger.io"
+tags:
+  - name: "Clothes"
+    description: "Clothes REST API"
+  - name: "Brand"
+    description: "Brand REST API"
+paths:
+  /clothes:
+    get:
+      tags:
+        - Clothes
+      summary: "filter clothes"
+      operationId: findClothes
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: header
+          name: range
+          required: false
+          type: string
+        - in: query
+          description: "Pet object that needs to be added to the store"
+          name: filter
+          required: false
+          type: string
+      responses:
+        200:
+          description: Success
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Clothes'
+        500:
+          description: Success
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ApplicationError'
+    post:
+      tags:
+        - Clothes
+      summary: "create new clothes"
+      operationId: createClothes
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: header
+          name: "X-Origin-Brand"
+          required: false
+          type: string
+        - in: body
+          name: clothes
+          required: true
+          schema:
+            $ref: '#/definitions/Clothes'
+      responses:
+        200:
+          description: Success
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Clothes'
+        500:
+          description: Success
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ApplicationError'
+  /clothes/brands/{brandIds}:
+    get:
+      tags:
+        - Clothes
+      summary: "filter clothes by brands"
+      operationId: getClothesByBrands
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: "brandIds"
+          in: "path"
+          description: "comma seperated brand's names"
+          required : true
+          type: string
+        - in: body
+          name: clothes
+          required: true
+          schema:
+            $ref: '#/definitions/BrandClothes'
+      responses:
+        200:
+          description: Success
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Clothes'
+        404:
+          description: clothes not found
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ApplicationError'
+        500:
+          description: internal server error
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ApplicationError'
+  /clothes/{clothesId}:
+    put:
+      tags:
+        - Clothes
+      summary: "update clothes"
+      operationId: updateClothes
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: "clothesId"
+          in: "path"
+          description: "clothes unique identifier"
+          required : true
+          type: string
+        - in: header
+          name: "X-Origin-Brand"
+          required: false
+          type: string
+        - in: body
+          name: clothes
+          required: true
+          schema:
+            $ref: '#/definitions/Clothes'
+      responses:
+        200:
+          description: Success
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Clothes'
+        404:
+          description: clothes not found
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ApplicationError'
+        500:
+          description: internal server error
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ApplicationError'
+    delete:
+      tags:
+        - Clothes
+      summary: "delete clothes"
+      operationId: deleteClothes
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: "clothesId"
+          in: "path"
+          description: "clothes unique identifier"
+          required : true
+          type: string
+      responses:
+        200:
+          description: Success
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Clothes'
+        404:
+          description: clothes not found
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ApplicationError'
+        500:
+          description: internal server error
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ApplicationError'
+  /brands:
+    get:
+      tags:
+        - Brands
+      summary: "find Brands"
+      operationId: findBrands
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        200:
+          description: Success
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Brand'
+        500:
+          description: Success
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ApplicationError'
+definitions:
+  Clothes:
+    type: object
+    properties:
+      id:
+        type: string
+      size:
+        type: string
+      color:
+        type: string
+  ApplicationError:
+    type: object
+    properties:
+      id:
+        type: string
+      message:
+        type: string
+  Brand:
+    type: object
+    properties:
+      id:
+        type: string
+      name:
+        type: string
+  BrandClothes:
+    type: object
+    properties:
+      name:
+        type: string
+      clothes:
+        type: array
+        items:
+          $ref: '#/definitions/Clothes'
