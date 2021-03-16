@@ -6,11 +6,12 @@ info:
   license:
     name: "Apache 2.0"
     url: "http://www.apache.org/licenses/LICENSE-2.0.html"
-host: "petstore.swagger.io"
+host: localhost:8080
+schemes: [http, https]
 tags:
   - name: "Clothes"
     description: "Clothes REST API"
-  - name: "Brand"
+  - name: "Brands"
     description: "Brand REST API"
 paths:
   /clothes:
@@ -78,10 +79,10 @@ paths:
             type: array
             items:
               $ref: '#/definitions/ApplicationError'
-  /clothes/brands/{brandIds}:
+  /brands/clothes/{brandIds}:
     get:
       tags:
-        - Clothes
+        - Brands
       summary: "filter clothes by brands"
       operationId: getClothesByBrands
       consumes:
@@ -94,11 +95,6 @@ paths:
           description: "comma seperated brand's names"
           required : true
           type: string
-        - in: body
-          name: clothes
-          required: true
-          schema:
-            $ref: '#/definitions/BrandClothes'
       responses:
         200:
           description: Success
@@ -228,6 +224,8 @@ definitions:
       size:
         type: string
       color:
+        type: string
+      type:
         type: string
   ApplicationError:
     type: object
