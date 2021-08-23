@@ -63,11 +63,6 @@
                 <artifactId>jackson-databind</artifactId>
             </dependency>
 
-            <dependency>
-                <groupId>org.mockito</groupId>
-                <artifactId>mockito-all</artifactId>
-                <version>${mockito-all.version}</version>
-            </dependency>
 
             <dependency>
                 <groupId>javax.ws.rs</groupId>
@@ -80,6 +75,7 @@
                 <artifactId>javaee-api</artifactId>
                 <version>${javaee-api.version}</version>
             </dependency>
+
 
         </dependencies>
     </dependencyManagement>

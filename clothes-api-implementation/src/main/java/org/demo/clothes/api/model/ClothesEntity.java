@@ -28,7 +28,7 @@ public class ClothesEntity{
             inverseJoinColumns = @JoinColumn(name = "BRD_ID"))
     private Set<BrandEntity> clothesBrands = new HashSet<>();
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumns({
             @JoinColumn(name="CLOTHES_TYPE", referencedColumnName = "TYPE_ID")
     })
