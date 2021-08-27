@@ -12,7 +12,7 @@ public class GetOperationsTest extends ClothesApiTest{
     @Transactional(transactionManager = "clothesTransactionManager")
      public void getWithknownId(){
         String existingId = clothesRepository.findAll().get(0).getId();
-        given().pathParam("id",existingId)
+        given().basePath(BASE_PATH).port(port).pathParam("id",existingId)
                 .when().get(RESSOURCE_PATH+"/{id}")
                 .then().statusCode(200)
                 .and().assertThat().contentType(ContentType.JSON);

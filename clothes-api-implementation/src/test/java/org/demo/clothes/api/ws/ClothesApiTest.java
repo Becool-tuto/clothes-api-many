@@ -9,21 +9,22 @@ import org.junit.Before;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.server.LocalServerPort;
 
 public  abstract class ClothesApiTest extends ClothesAppTestServer {
 
     private static final Logger logger = LoggerFactory.getLogger(ClothesApiTest.class);
 
-    protected static final String RESSOURCE_PATH = "localhost:8080/clothesapi/v1/clothes";
+    protected static final String RESSOURCE_PATH = "/clothes";
+
+    protected static final String BASE_PATH= "/clothesapi/v1";
 
     @Autowired
     protected ClothesRepository clothesRepository;
 
-    @Before
-    public void setUpRestAssured(){
-        RestAssured.port = 8080;
-        RestAssured.basePath = "clothesapi/v1";
-    }
+    @LocalServerPort
+    protected int port;
+
 
     @Before
     public void insertSomeData(){

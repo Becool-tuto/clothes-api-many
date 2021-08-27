@@ -65,6 +65,17 @@ public class ClothesApiImpl implements ClothesApi {
     }
 
     @Override
+    public Response getClothesByID(String clothesId) {
+        try{
+            Clothes clothes = clothesBusiness.viewClothes(clothesId);
+            return Response.status(Response.Status.OK).entity(clothes).build();
+        }catch (ClothesNotFoundException clothesNotFoundException){
+            return Response.status(Response.Status.NOT_FOUND).entity(String.format("Clothes with given id < %s > not found ",clothesId)).build();
+        }
+
+    }
+
+    @Override
     public Response updateClothes(String clothesId, @javax.validation.Valid Clothes clothes, String xOriginBrand) {
        try{
            clothesBusiness.updateClothes(clothesId,clothes,xOriginBrand);

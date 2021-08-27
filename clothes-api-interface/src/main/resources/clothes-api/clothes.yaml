@@ -47,6 +47,7 @@ paths:
             type: array
             items:
               $ref: '#/definitions/ApplicationError'
+
     post:
       tags:
         - Clothes
@@ -146,6 +147,38 @@ paths:
             type: array
             items:
               $ref: '#/definitions/Clothes'
+        404:
+          description: clothes not found
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ApplicationError'
+        500:
+          description: internal server error
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ApplicationError'
+    get:
+      tags:
+        - Clothes
+      summary: "get clothes by ID"
+      operationId: getClothesByID
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - name: "clothesId"
+          in: "path"
+          description: "clothes unique identifier"
+          required : true
+          type: string
+      responses:
+        200:
+          description: Success
+          schema:
+            $ref: '#/definitions/Clothes'
         404:
           description: clothes not found
           schema:
