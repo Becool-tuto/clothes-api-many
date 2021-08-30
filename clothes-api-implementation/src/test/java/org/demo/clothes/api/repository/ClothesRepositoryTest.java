@@ -28,6 +28,7 @@ public class ClothesRepositoryTest extends ClothesAppTestServer {
 
 
     @Test
+    @Transactional(transactionManager = "clothesTransactionManager")
     public void testWhenFindByIDAndNOClothesMatchedThenReturnNothing(){
 
         clothesRepository.deleteAll();

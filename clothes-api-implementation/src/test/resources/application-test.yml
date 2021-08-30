@@ -9,5 +9,5 @@ spring:
   db:
     clothesdb:
       datasource:
-        url: jdbc:h2:mem:clothestest;MODE=MYSQL;INIT=RUNSCRIPT FROM 'classpath:init_clothesdb.sql';
+        url: jdbc:h2:mem:clothesdb;MODE=MYSQL;INIT=RUNSCRIPT FROM 'classpath:init_clothesdb.sql';
         driver-class-name: org.h2.Driver

@@ -33,13 +33,13 @@ public class ClothesDbConfig {
     @ConfigurationProperties(prefix = "db.clothes.datasource")
     public DataSource dataSource(){  DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName("org.h2.Driver");
-        dataSource.setUrl("jdbc:h2:mem:clothestest;MODE=MYSQL;INIT=RUNSCRIPT FROM 'classpath:init_clothesdb.sql';");
+        dataSource.setUrl("jdbc:h2:mem:clothesdb;MODE=MYSQL;INIT=RUNSCRIPT FROM 'classpath:init_clothesdb.sql';");
         return dataSource;}
 
     @Primary
     @Bean(name="clothesEntityManagerFactory")
     public LocalContainerEntityManagerFactoryBean clothesEntityManagerFactory(EntityManagerFactoryBuilder builder, @Qualifier("clothesDataSource") DataSource dataSource){
-        return builder.dataSource(dataSource).packages("org.demo.clothes.api.model").persistenceUnit("clothes").build();
+        return builder.dataSource(dataSource).packages("org.demo.clothes.api.model").persistenceUnit("clothesdb").build();
     }
 
     @Primary

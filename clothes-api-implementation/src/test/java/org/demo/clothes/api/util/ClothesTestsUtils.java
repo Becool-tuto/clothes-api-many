@@ -3,8 +3,6 @@ package org.demo.clothes.api.util;
 import org.demo.clothes.api.model.ClothesEntity;
 import org.demo.clothes.api.model.TypeEntity;
 
-import java.lang.reflect.Type;
-import java.util.UUID;
 
 public class ClothesTestsUtils {
 

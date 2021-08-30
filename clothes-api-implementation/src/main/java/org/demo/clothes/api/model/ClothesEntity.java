@@ -23,7 +23,7 @@ public class ClothesEntity{
 
     @ManyToMany
     @JoinTable(
-            name= "CLOTHES_BRDS",
+            name= "CLOTHES_BRDS", schema = "clothesdb",
             joinColumns = @JoinColumn(name = "CLOTHES_ID"),
             inverseJoinColumns = @JoinColumn(name = "BRD_ID"))
     private Set<BrandEntity> clothesBrands = new HashSet<>();
