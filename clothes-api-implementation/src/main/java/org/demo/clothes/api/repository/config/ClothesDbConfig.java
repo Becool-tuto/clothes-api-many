@@ -5,7 +5,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -34,6 +33,8 @@ public class ClothesDbConfig {
     public DataSource dataSource(){  DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName("org.h2.Driver");
         dataSource.setUrl("jdbc:h2:mem:clothesdb;MODE=MYSQL;INIT=RUNSCRIPT FROM 'classpath:init_clothesdb.sql';");
+        dataSource.setUsername("sa");
+        dataSource.setPassword("");
         return dataSource;}
 
     @Primary

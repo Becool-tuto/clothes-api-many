@@ -17,6 +17,8 @@ public  abstract class ClothesApiTest extends ClothesAppTestServer {
 
     protected static final String RESSOURCE_PATH = "/clothes";
 
+    protected static final String RESSOURCE_BRAND_PATH = "/brands";
+
     protected static final String BASE_PATH= "/clothesapi/v1";
 
     @Autowired
