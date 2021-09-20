@@ -1,5 +1,6 @@
 package org.demo.clothes.api.ws;
 
+import org.demo.clothes.api.filter.AuthenticationFilter;
 import org.example.clothes.api.v1.BrandsApi;
 import org.example.clothes.api.v1.ClothesApi;
 import org.glassfish.jersey.server.ResourceConfig;
@@ -18,5 +19,6 @@ public class ClothesWSConfig extends ResourceConfig {
     private void registerEndpoints() {
          register(BrandsApi.class);
          register(ClothesApi.class);
+         register(AuthenticationFilter.class);
     }
 }
